@@ -5,5 +5,5 @@ function greetUser(user:{name:string,age:number,email:string,roles:string[]}){co
 const users=[{name:"Harshal",age:25,email:"harshal@example.com",roles:["admin","user"]},{name:"John",age:30,email:"john@example.com",roles:["user"]}]
 
 users.forEach(user=>{if(user.roles.includes("admin")){console.log(`${user.name} is an admin`)}})
-
+ 
 greetUser(user)
