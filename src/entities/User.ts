@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { UserRole } from '../types/index.js';
 
 @Entity()
 export class User {
@@ -6,11 +7,24 @@ export class User {
   id!: number;
 
   @Column({ type: 'varchar' })
-  firstName!: string;
+  name!: string;
 
-  @Column({ type: 'varchar' })
-  lastName!: string;
+  @Column({
+    type: 'varchar',
+    unique: true,
+  })
+  email!: string;
 
-  @Column({ type: 'int' })
-  age!: number;
+  @Column({
+    type: 'varchar',
+    select: false,
+  })
+  password!: string;
+
+  @Column({
+    type: 'enum',
+    enum: UserRole,
+    default: UserRole.USER,
+  })
+  role!: string;
 }
