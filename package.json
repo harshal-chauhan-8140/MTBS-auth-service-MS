@@ -1,38 +1,50 @@
 {
-  "name": "user-service",
-  "version": "1.0.0",
-  "description": "",
-  "license": "ISC",
-  "author": "",
-  "type": "module",
-  "main": "index.js",
-  "scripts": {
-    "dev": "nodemon --watch src --ext ts --exec tsx src/index.ts",
-    "start": "node dist/index.js",
-    "build": "tsc",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "lint": "eslint .",
-    "check": "npm run lint && npm run format:check && npm run build",
-    "prepare": "husky"
-  },
-  "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "@types/node": "^26.2.0",
-    "eslint": "^10.8.1",
-    "husky": "^9.1.7",
-    "lint-staged": "^17.3.0",
-    "nodemon": "^3.1.14",
-    "prettier": "3.9.6",
-    "tsx": "^4.23.12",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.67.0"
-  },
-  "lint-staged": {
-    "*.{ts,mjs}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,md,yml}": "prettier --write"
-  }
+   "name": "user-service",
+   "version": "1.0.0",
+   "description": "",
+   "license": "ISC",
+   "author": "",
+   "type": "module",
+   "main": "index.js",
+   "scripts": {
+      "dev": "cross-env NODE_ENV=dev nodemon --watch src --ext ts --exec tsx src/server.ts",
+      "start": "ts-node src/index.ts",
+      "build": "tsc",
+      "format": "prettier --write .",
+      "format:check": "prettier --check .",
+      "lint": "eslint .",
+      "check": "npm run lint && npm run format:check && npm run build",
+      "prepare": "husky",
+      "typeorm": "typeorm-ts-node-commonjs"
+   },
+   "devDependencies": {
+      "@eslint/js": "^10.0.1",
+      "@types/node": "^26.2.0",
+      "@types/pg": "^8.21.0",
+      "eslint": "^10.8.1",
+      "husky": "^9.1.7",
+      "lint-staged": "^17.3.0",
+      "nodemon": "^3.1.14",
+      "prettier": "3.9.6",
+      "ts-node": "^10.9.2",
+      "tsx": "^4.23.12",
+      "typescript": "^5.9.3",
+      "typescript-eslint": "^8.67.0"
+   },
+   "lint-staged": {
+      "*.{ts,mjs}": [
+         "eslint --fix",
+         "prettier --write"
+      ],
+      "*.{json,md,yml}": "prettier --write"
+   },
+   "dependencies": {
+      "@types/express": "^5.0.6",
+      "cross-env": "^10.1.0",
+      "dotenv": "^17.4.2",
+      "express": "^5.2.1",
+      "pg": "^8.23.0",
+      "reflect-metadata": "^0.2.2",
+      "typeorm": "1.0.0"
+   }
 }
