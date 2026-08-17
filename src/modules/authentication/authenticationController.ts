@@ -5,6 +5,7 @@ import type { JwtPayload } from 'jsonwebtoken';
 import type { TokenService } from '../token/tokenService.js';
 import { REFRESH_TOKEN_AGE, ACCESS_TOKEN_AGE } from '../../constants/index.js';
 import { config } from '../../config/index.js';
+import { UserRole } from '../../types/index.js';
 import type { AuthRequest } from './types.js';
 import createHttpError from 'http-errors';
 
@@ -14,7 +15,7 @@ export class AuthenticationController {
     private tokenService: TokenService,
   ) {}
 
-  async register(req: Request, res: Response, next: NextFunction) {
+  private async registerWithRole(req: Request, res: Response, role: UserRole) {
     const { name, email, password } = req.body;
 
     const result = validationResult(req);
@@ -24,7 +25,7 @@ export class AuthenticationController {
       });
     }
 
-    const user = await this.userService.create(name, email, password);
+    const user = await this.userService.create(name, email, password, role);
 
     const payload: JwtPayload = {
       sub: user.id.toString(),
@@ -53,6 +54,14 @@ export class AuthenticationController {
     res.status(201).json({
       id: user.id,
     });
+  }
+
+  async register(req: Request, res: Response, next: NextFunction) {
+    return this.registerWithRole(req, res, UserRole.USER);
+  }
+
+  async registerTheaterOwner(req: Request, res: Response, next: NextFunction) {
+    return this.registerWithRole(req, res, UserRole.MOVIE_THEATER_OWNER);
   }
 
   async login(req: Request, res: Response, next: NextFunction) {

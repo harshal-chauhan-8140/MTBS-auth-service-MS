@@ -8,6 +8,7 @@
    "main": "index.js",
    "scripts": {
       "dev": "cross-env NODE_ENV=dev nodemon --watch src --ext ts --exec tsx src/server.ts",
+      "create-admin": "cross-env NODE_ENV=dev tsx scripts/createAdmin.ts",
       "test": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --runInBand",
       "test:watch": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --watch --runInBand",
       "start": "ts-node src/index.ts",

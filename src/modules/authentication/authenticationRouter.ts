@@ -27,6 +27,12 @@ router.post(
 );
 
 router.post(
+  '/register-theater-owner',
+  registerValidator,
+  asyncWrapper(authenticationController.registerTheaterOwner.bind(authenticationController)),
+);
+
+router.post(
   '/login',
   loginValidator,
   asyncWrapper(authenticationController.login.bind(authenticationController)),
