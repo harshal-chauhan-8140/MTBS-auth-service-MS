@@ -1,7 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { UserRole } from '../types/index.js';
+import { UserRole } from '../../types/index.js';
 
-@Entity()
+@Entity({
+  name: 'users',
+})
 export class User {
   @PrimaryGeneratedColumn()
   id!: number;
