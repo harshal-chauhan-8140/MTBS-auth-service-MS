@@ -32,6 +32,7 @@ export class AuthenticationController {
       name: user.name,
       email: user.email,
       role: user.role,
+      theaterIds: user.theaterIds,
     };
 
     const accessToken = this.tokenService.generateAccessToken(payload);
@@ -97,6 +98,7 @@ export class AuthenticationController {
       name: user.name,
       email: user.email,
       role: user.role,
+      theaterIds: user.theaterIds,
     };
 
 
@@ -151,6 +153,7 @@ export class AuthenticationController {
       name: user.name,
       email: user.email,
       role: user.role,
+      theaterIds: user.theaterIds,
     };
 
     const accessToken = this.tokenService.generateAccessToken(payload);

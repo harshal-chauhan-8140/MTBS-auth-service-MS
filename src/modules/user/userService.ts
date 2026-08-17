@@ -38,27 +38,43 @@ export class UserService {
   async getUserByEmailWithPassword(email: string) {
     return await this.userRepository.findOne({
       where: {
-        email
+        email,
       },
       select: {
         id: true,
         name: true,
         email: true,
         role: true,
-        password: true
-      }
-    })
+        password: true,
+        theaterIds: true,
+      },
+    });
   }
 
-  async isUserPasswordMatched(password: string, hashedPassword: string){
+  async isUserPasswordMatched(password: string, hashedPassword: string) {
     return await bcrypt.compare(password, hashedPassword);
   }
 
-  async getUserById(id: number){
+  async getUserById(id: number) {
     return await this.userRepository.findOne({
       where: {
-        id
-      }
-    })
+        id,
+      },
+    });
   }
-} 
+
+  async addTheaterId(userId: number, theaterId: number) {
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+
+    if (!user) {
+      throw createHttpError(404, 'User not found');
+    }
+
+    if (!user.theaterIds.includes(theaterId)) {
+      user.theaterIds = [...user.theaterIds, theaterId];
+      await this.userRepository.save(user);
+    }
+
+    return user;
+  }
+}

@@ -21,4 +21,21 @@ export class UserController {
       id: user.id,
     });
   }
+
+  async addTheater(req: Request, res: Response) {
+    const { theaterId } = req.body;
+
+    const result = validationResult(req);
+    if (!result.isEmpty()) {
+      return res.status(400).json({
+        errors: result.array(),
+      });
+    }
+
+    const user = await this.userService.addTheaterId(Number(req.params.id), Number(theaterId));
+
+    res.status(200).json({
+      theaterIds: user.theaterIds,
+    });
+  }
 }

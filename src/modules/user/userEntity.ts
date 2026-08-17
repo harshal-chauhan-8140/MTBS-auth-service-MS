@@ -29,4 +29,7 @@ export class User {
     default: UserRole.USER,
   })
   role!: string;
+
+  @Column({ type: 'int', array: true, default: '{}' })
+  theaterIds!: number[];
 }
